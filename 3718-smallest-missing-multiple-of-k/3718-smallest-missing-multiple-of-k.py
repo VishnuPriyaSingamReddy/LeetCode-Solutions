@@ -1,0 +1,10 @@
+class Solution:
+    def missingMultiple(self, nums, k):
+        s = set(nums)
+
+        x = k
+
+        while x in s:
+            x += k
+
+        return x
