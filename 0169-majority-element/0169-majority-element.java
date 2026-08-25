@@ -1,14 +1,17 @@
 class Solution {
     public int majorityElement(int[] nums) {
-        HashMap<Integer,Integer>  map=new HashMap<>();
-        int n=nums.length;
-        for(int i:nums){
-            map.put(i,map.getOrDefault(i,0)+1);
+        //boyermoore voting algorithm
+        int count=0;
+        int candidate=0;
+        for(int num:nums){
+            if(count==0){
+                candidate=num;
+                count=1;
+            }
+            else if(candidate==num) count++;
+            else count--;
         }
-        for(int i:map.keySet()){
-            if(map.get(i)>n/2)
-            return i;
-        }
-        return -1;
+        return candidate;
+        
     }
 }
