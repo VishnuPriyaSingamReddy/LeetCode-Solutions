@@ -1,47 +1,33 @@
 class Solution {
     public boolean search(int[] nums, int target) {
+        int low = 0;
+        int high = nums.length-1;
+        while(low<=high){
+            int mid = (low+high)/2;
+            //case1 :: if target is in mid pos 
+            if(nums[mid]==target) return true;
+            //special case because of duplicates
+            if(nums[low]==nums[mid]&& 
+             nums[mid]==nums[high]) {
+                low++; 
+                high--;
+                continue;
+             }
 
-        int left = 0;
-        int right = nums.length - 1;
-
-        while (left <= right) {
-
-            int mid = left + (right - left) / 2;
-
-            // Target found
-            if (nums[mid] == target) {
-                return true;
+            //case2:: if left array is sorted
+            if(nums[low]<=nums[mid]){
+                if(nums[low]<=target && target<=nums[mid])
+                    high=mid-1;
+                else 
+                    low=mid+1;
             }
-
-            // Duplicates: cannot determine which side is sorted
-            if (nums[left] == nums[mid] && nums[mid] == nums[right]) {
-                left++;
-                right--;
-            }
-
-            // Left half is sorted
-            else if (nums[left] <= nums[mid]) {
-
-                // Target lies in the left sorted half
-                if (nums[left] <= target && target < nums[mid]) {
-                    right = mid - 1;
-                } else {
-                    left = mid + 1;
-                }
-            }
-
-            // Right half is sorted
-            else {
-
-                // Target lies in the right sorted half
-                if (nums[mid] < target && target <= nums[right]) {
-                    left = mid + 1;
-                } else {
-                    right = mid - 1;
-                }
-            }
+            else{ //case3: if right array is sorted 
+                if(nums[mid]<=target && target<=nums[high])
+                    low = mid+1;
+                else 
+                    high = mid-1;
+            } 
         }
-
         return false;
     }
 }
