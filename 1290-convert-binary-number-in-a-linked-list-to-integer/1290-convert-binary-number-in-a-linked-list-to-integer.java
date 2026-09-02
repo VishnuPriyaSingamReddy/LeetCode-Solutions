@@ -10,11 +10,11 @@
  */
 class Solution {
     public int getDecimalValue(ListNode head) {
-        int result=0;
-        while(head!=null){
-            result=result*2+head.val;
-            head=head.next;
+        ListNode temp=head;
+        int deciNum=0;
+        while(temp!=null){
+            deciNum=deciNum*2+temp.val;
+            temp=temp.next;
         }
-        return result;
-    }
-}
+        return deciNum;
+}}
