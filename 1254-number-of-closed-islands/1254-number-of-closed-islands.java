@@ -1,47 +1,41 @@
 class Solution {
+    public int closedIsland(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        int count = 0;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 0) {
+                    if (dfs(grid, i, j)) {
+                        count++;
+                    }
+                }
+            }
+        }
+
+        return count;
+    }
+
     private boolean dfs(int[][] grid, int r, int c) {
+        int m = grid.length;
+        int n = grid[0].length;
 
-        // Out of bounds → island touches boundary
-        if (r < 0 || c < 0 || r >= grid.length ||
-            c >= grid[0].length)
+        if (r < 0 || c < 0 || r >= m || c >= n) {
             return false;
+        }
 
-        // Water
-        if (grid[r][c] == 1)
+        if (grid[r][c] == 1) {
             return true;
+        }
 
-        // Already visited
-        if (grid[r][c] == 2)
-            return true;
-
-        // Mark as visited
-        grid[r][c] = 2;
+        grid[r][c] = 1; // Mark visited
 
         boolean up = dfs(grid, r - 1, c);
         boolean down = dfs(grid, r + 1, c);
         boolean left = dfs(grid, r, c - 1);
         boolean right = dfs(grid, r, c + 1);
 
-        // All four directions must remain inside
         return up && down && left && right;
-    }
-
-    public int closedIsland(int[][] grid) {
-        int n = grid.length;
-        int m = grid[0].length;
-        int closedIsl = 0;
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-
-                if (grid[i][j] == 0) {
-                    if (dfs(grid, i, j)) {
-                        closedIsl++;
-                    }
-                }
-            }
-        }
-
-        return closedIsl;
     }
 }
