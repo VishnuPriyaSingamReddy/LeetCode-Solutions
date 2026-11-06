@@ -6,7 +6,7 @@ class Solution {
             diff[i[1]+1]--;
         }
         int pref=0;
-        for(int i=0;i<=50;i++){
+        for(int i=0;i<=51;i++){
             pref+=diff[i];
             if(i>=left&&i<=right&&pref==0)
                 return false;
