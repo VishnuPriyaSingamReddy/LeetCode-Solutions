@@ -1,16 +1,10 @@
 class Solution {
-    int arr[];
     public int climbStairs(int n) {
-        arr=new int[n+1];
-        return fib(n);
-        
-    }
-    public int fib(int n){
-        if(n<=1)
-            return 1;
-        if (arr[n]!=0)
-            return arr[n];
-        arr[n]=fib(n-1)+fib(n-2);
+        int arr[]=new int[n+1];
+        arr[0]=1;
+        arr[1]=1;
+        for(int i=2;i<n+1;i++)
+            arr[i]=arr[i-1]+arr[i-2];
         return arr[n];
     }
 }
